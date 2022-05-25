@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { pwaTrackingListeners } from "../scripts/pwaEventlisteners";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
       <p className={styles.summary}>
         Install this web application when prompted to test PWA installability.
       </p>
+      <button onClick={pwaTrackingListeners}>INSTALL BUTTON </button>
 
       <footer className={styles.footer}>
         <p className={styles.description}>
