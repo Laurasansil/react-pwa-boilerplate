@@ -6,17 +6,11 @@ import { useEffect } from "react";
 
 export default function Home() {
   useEffect(() => {
-    window.OneSignal = window.OneSignal || [];
-    OneSignal.push(function () {
-      OneSignal.init({
-        appId: "3cf559ab-0b83-4f06-b636-db67c7a11e36",
-        notifyButton: { enable: true },
-        allowLocalhostAsSecureOrigin: true,
-      });
+    OneSignal.init({
+      appId: "3cf559ab-0b83-4f06-b636-db67c7a11e36",
+      notifyButton: { enable: true },
+      allowLocalhostAsSecureOrigin: true,
     });
-    return () => {
-      window.OneSignal = undefined;
-    };
   }, []);
 
   return (

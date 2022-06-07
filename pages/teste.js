@@ -6,17 +6,11 @@ import { useEffect } from "react";
 
 export default function Teste() {
   useEffect(() => {
-    window.OneSignal = window.OneSignal || [];
-    OneSignal.push(function () {
-      OneSignal.init({
-        appId: "36f3eefd-9063-424c-8226-1b63900eb803",
-        notifyButton: { enable: true },
-        allowLocalhostAsSecureOrigin: true,
-      });
+    OneSignal.init({
+      appId: "36f3eefd-9063-424c-8226-1b63900eb803",
+      notifyButton: { enable: true },
+      allowLocalhostAsSecureOrigin: true,
     });
-    return () => {
-      window.OneSignal = undefined;
-    };
   }, []); // <-- run this effect once on mount
 
   return (
