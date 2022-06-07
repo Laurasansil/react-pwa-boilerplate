@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "predeploy": "yarn build",
-    "deploy": "gh-pages -d build"
+    "deploy": "vercel --prod "
   },
   "dependencies": {
     "next": "11.0.1",
@@ -17,7 +16,6 @@
   "devDependencies": {
     "eslint": "7.30.0",
     "eslint-config-next": "11.0.1",
-    "gh-pages": "^4.0.0",
     "vercel": "23.0.1"
   }
 }
