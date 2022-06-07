@@ -4,13 +4,14 @@ import styles from "../styles/Home.module.css";
 import OneSignal from "react-onesignal";
 import { useEffect } from "react";
 
-export default function Home() {
+export default function Teste() {
   useEffect(() => {
     OneSignal.init({
-      appId: "3cf559ab-0b83-4f06-b636-db67c7a11e36",
+      appId: "36f3eefd-9063-424c-8226-1b63900eb803",
       persistNotification: true,
     });
   }, []);
+
   return (
     <div className={styles.container}>
       <Head>
