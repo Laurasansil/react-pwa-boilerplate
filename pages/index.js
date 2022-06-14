@@ -38,27 +38,6 @@ export default function Home() {
   //   }
   // }
 
-  (async function orderTracking() {
-    try {
-      const permission = await Notification.requestPermission();
-      console.log(permission);
-      const options = {
-        body: "ATENÇÃO! O preparo da sua refeição acabou de começar! Logo mais traremos novidades :D",
-        icon: "vegetais.png",
-        dir: auto,
-        image: "burger.png",
-        lang: "pt-BR",
-        renotify: true,
-      };
-      const notify = new Notification("title", options);
-      notify.onclick = () => {
-        alert("Notification clicked");
-      };
-    } catch (error) {
-      console.log(error);
-    }
-  })();
-
   return (
     <div className={styles.container}>
       <Head>
@@ -78,9 +57,9 @@ export default function Home() {
         Botão de instalação :D
       </button>
 
-      <button tton onClick={orderTracking}>
+      {/* <button tton onClick={orderTracking}>
         Botão de notificação
-      </button>
+      </button> */}
 
       <footer className={styles.footer}>
         <p className={styles.description}>
