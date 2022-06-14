@@ -13,10 +13,34 @@ export default function Home() {
     });
   }, []);
 
+  function pushOrderTracking() {
+    addEventListener("click", () => {
+      if (!window.Notification) return;
+
+      Notification.requestPermission().then(showNotification);
+      console.log("funcionou");
+    });
+    function showNotification(permission) {
+      if (permission !== "granted") return;
+      let notification = new Notification("Pedido iniciado!", {
+        body: "ATENÇÃO! O preparo da sua refeição acabou de começar! Logo mais traremos novidades :D",
+        icon: "vegetais.png",
+        dir: auto,
+        image: "burger.png",
+        lang: "pt-BR",
+        renotify: true,
+      });
+      notification.onclick = () => {
+        // window.open('https://google.com')
+        window.location.href = "https://menu.ifood.com.br/teste-marketplace/";
+      };
+    }
+  }
+
   return (
     <div className={styles.container}>
       <Head>
-        <title>React PWA Boilerplate</title>
+        <title>PWA Teste</title>
         <meta
           name="description"
           content="A PWA boilerplate/reference application in React"
@@ -27,10 +51,14 @@ export default function Home() {
       </Head>
 
       <h1 className={styles.title}>React PWA Boilerplate</h1>
-      <p className={styles.summary}>
-        Install this web application when prompted to test PWA installability.
-      </p>
-      <button onClick={pwaTrackingListeners}>INSTALL BUTTON </button>
+      <p className={styles.summary}>Instale o nosso PWA!</p>
+      <button tton onClick={pwaTrackingListeners}>
+        Botão de instalação :D
+      </button>
+
+      <button tton onClick={pushOrderTracking}>
+        Acompanhe o pedido!
+      </button>
 
       <footer className={styles.footer}>
         <p className={styles.description}>

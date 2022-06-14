@@ -10,6 +10,7 @@ export default function Teste() {
       appId: "36f3eefd-9063-424c-8226-1b63900eb803",
       notifyButton: { enable: true },
       allowLocalhostAsSecureOrigin: true,
+      
     });
   }, []); // <-- run this effect once on mount
 
