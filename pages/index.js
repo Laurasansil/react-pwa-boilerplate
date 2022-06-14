@@ -13,35 +13,19 @@ export default function Home() {
   //   });
   // }, []);
 
-  // function pushOrderTracking() {
-  //   let button = document.querySelector("button");
-  //   button.addEventListener("click", () => {
-  //     if (!window.Notification) return;
-
-  //     Notification.requestPermission().then(showNotification);
-  //   });
-
-  //   function showNotification(permission) {
-  //     if (permission !== "granted") return;
-  //     let notification = new Notification("Pedido iniciado!", {
-  //       body: "ATENÇÃO! O preparo da sua refeição acabou de começar! Logo mais traremos novidades :D",
-  //       icon: "vegetais.png",
-  //       dir: auto,
-  //       image: "burger.png",
-  //       lang: "pt-BR",
-  //       renotify: true,
-  //     });
-  //     notification.onclick = () => {
-  //       // window.open('https://google.com')
-  //       window.location.href = "https://menu.ifood.com.br/teste-marketplace/";
-  //     };
-  //   }
-  // }
-
   useEffect(() => {
     if (Notification.permission === "granted") {
-      alert("Temos permissão!");
-      console.log(permission);
+      let notification = new Notification("Pedido iniciado!", {
+        body: "ATENÇÃO! O preparo da sua refeição acabou de começar! Logo mais traremos novidades :D",
+        icon: "vegetais.png",
+        dir: auto,
+        image: "burger.png",
+        lang: "pt-BR",
+        renotify: true,
+      });
+      notification.onshow = () => {
+        // window.open('https://google.com')
+      };
     } else if (Notification.permission !== "denied") {
       Notification.requestPermission().then((permission) => {
         console.log(permission);
@@ -67,8 +51,8 @@ export default function Home() {
       <button tton onClick={pwaTrackingListeners}>
         Botão de instalação :D
       </button>
-
-      {/* <button tton onClick={orderTracking}>
+      {/* 
+      <button tton onClick={showNotification}>
         Botão de notificação
       </button> */}
 
