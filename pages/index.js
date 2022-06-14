@@ -78,10 +78,6 @@ export default function Home() {
         Botão de instalação :D
       </button>
 
-      <button tton onClick={pushOrderTracking}>
-        Acompanhe o pedido!
-      </button>
-
       <footer className={styles.footer}>
         <p className={styles.description}>
           To read about how to show PWA install banner for your website,{" "}
