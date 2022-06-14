@@ -5,13 +5,13 @@ import OneSignal from "react-onesignal";
 import { useEffect } from "react";
 
 export default function Home() {
-  useEffect(() => {
-    OneSignal.init({
-      appId: "3cf559ab-0b83-4f06-b636-db67c7a11e36",
-      notifyButton: { enable: true },
-      allowLocalhostAsSecureOrigin: true,
-    });
-  }, []);
+  // useEffect(() => {
+  //   OneSignal.init({
+  //     appId: "3cf559ab-0b83-4f06-b636-db67c7a11e36",
+  //     notifyButton: { enable: true },
+  //     allowLocalhostAsSecureOrigin: true,
+  //   });
+  // }, []);
 
   // function pushOrderTracking() {
   //   let button = document.querySelector("button");
@@ -38,7 +38,7 @@ export default function Home() {
   //   }
   // }
 
-  (async () => {
+  (async function orderTracking() {
     try {
       const permission = await Notification.requestPermission();
       console.log(permission);
@@ -50,8 +50,8 @@ export default function Home() {
         lang: "pt-BR",
         renotify: true,
       };
-      const n = new Notification("title", options);
-      n.onclick = () => {
+      const notify = new Notification("title", options);
+      notify.onclick = () => {
         alert("Notification clicked");
       };
     } catch (error) {
@@ -76,6 +76,10 @@ export default function Home() {
       <p className={styles.summary}>Instale o nosso PWA!</p>
       <button tton onClick={pwaTrackingListeners}>
         Botão de instalação :D
+      </button>
+
+      <button tton onClick={orderTracking}>
+        Botão de notificação
       </button>
 
       <footer className={styles.footer}>
