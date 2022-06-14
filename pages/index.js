@@ -14,6 +14,13 @@ export default function Home() {
   }, []);
 
   function pushOrderTracking() {
+    let button = document.querySelector("button");
+    button.addEventListener("click", () => {
+      if (!window.Notification) return;
+
+      Notification.requestPermission().then(showNotification);
+    });
+
     function showNotification(permission) {
       if (permission !== "granted") return;
       let notification = new Notification("Pedido iniciado!", {
@@ -29,9 +36,6 @@ export default function Home() {
         window.location.href = "https://menu.ifood.com.br/teste-marketplace/";
       };
     }
-
-    Notification.requestPermission().then(showNotification);
-    console.log("funcionou");
   }
 
   return (
