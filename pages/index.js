@@ -13,30 +13,51 @@ export default function Home() {
     });
   }, []);
 
-  function pushOrderTracking() {
-    let button = document.querySelector("button");
-    button.addEventListener("click", () => {
-      if (!window.Notification) return;
+  // function pushOrderTracking() {
+  //   let button = document.querySelector("button");
+  //   button.addEventListener("click", () => {
+  //     if (!window.Notification) return;
 
-      Notification.requestPermission().then(showNotification);
-    });
+  //     Notification.requestPermission().then(showNotification);
+  //   });
 
-    function showNotification(permission) {
-      if (permission !== "granted") return;
-      let notification = new Notification("Pedido iniciado!", {
+  //   function showNotification(permission) {
+  //     if (permission !== "granted") return;
+  //     let notification = new Notification("Pedido iniciado!", {
+  //       body: "ATENÇÃO! O preparo da sua refeição acabou de começar! Logo mais traremos novidades :D",
+  //       icon: "vegetais.png",
+  //       dir: auto,
+  //       image: "burger.png",
+  //       lang: "pt-BR",
+  //       renotify: true,
+  //     });
+  //     notification.onclick = () => {
+  //       // window.open('https://google.com')
+  //       window.location.href = "https://menu.ifood.com.br/teste-marketplace/";
+  //     };
+  //   }
+  // }
+
+  (async () => {
+    try {
+      const permission = await Notification.requestPermission();
+      console.log(permission);
+      const options = {
         body: "ATENÇÃO! O preparo da sua refeição acabou de começar! Logo mais traremos novidades :D",
         icon: "vegetais.png",
         dir: auto,
         image: "burger.png",
         lang: "pt-BR",
         renotify: true,
-      });
-      notification.onclick = () => {
-        // window.open('https://google.com')
-        window.location.href = "https://menu.ifood.com.br/teste-marketplace/";
       };
+      const n = new Notification("title", options);
+      n.onclick = () => {
+        alert("Notification clicked");
+      };
+    } catch (error) {
+      console.log(error);
     }
-  }
+  })();
 
   return (
     <div className={styles.container}>
