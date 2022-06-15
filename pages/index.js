@@ -1,8 +1,8 @@
 import Head from "next/head";
 import { pwaTrackingListeners } from "../scripts/pwaEventlisteners";
 import styles from "../styles/Home.module.css";
-import OneSignal from "react-onesignal";
-import { useEffect, useState } from "react";
+// import OneSignal from "react-onesignal";
+import { useEffect } from "react";
 
 export default function Home() {
   // useEffect(() => {
@@ -25,15 +25,19 @@ export default function Home() {
   // };
 
   useEffect(() => {
-    if (Notification.permission === "granted" && window.isSecureContext) {
-      let notification = new Notification("Pedido iniciado!", {
+    function showNotification() {
+      const notification = new Notification("Pedido iniciado!", {
         body: "ATENÇÃO! O preparo da sua refeição acabou de começar! Logo mais traremos novidades :D",
         icon: "images/icon-burger.png",
-        image: "/images/burger.jpg",
+        image: "images/burger.jpg",
       });
-      notification.onshow = () => {
-        // window.open('https://google.com')
+      notification.onclick = () => {
+        // window.location.href = 'rota de tracking'
       };
+    }
+
+    if (Notification.permission === "granted" && window.isSecureContext) {
+      showNotification();
     } else if (Notification.permission !== "denied") {
       Notification.requestPermission().then((permission) => {
         console.log(permission);
