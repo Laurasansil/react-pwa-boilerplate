@@ -26,6 +26,8 @@ export default function Home() {
 
   useEffect(() => {
     function showNotification() {
+      if (!window.isSecureContext) return;
+      if (!Notification) return;
       const notification = new Notification("Pedido iniciado!", {
         body: "ATENÇÃO! O preparo da sua refeição acabou de começar! Logo mais traremos novidades :D",
         icon: "images/icon-burger.png",
@@ -36,7 +38,7 @@ export default function Home() {
       };
     }
 
-    if (Notification.permission === "granted" && window.isSecureContext) {
+    if (Notification.permission === "granted") {
       showNotification();
     } else if (Notification.permission !== "denied") {
       Notification.requestPermission().then((permission) => {
@@ -64,9 +66,9 @@ export default function Home() {
         Botão de instalação :D
       </button>
 
-      <button tton onClick={() => setShowPush(showPush)}>
+      {/* <button tton onClick={() => setShowPush(showPush)}>
         Botão de notificação
-      </button>
+      </button> */}
 
       <footer className={styles.footer}>
         <p className={styles.description}>
