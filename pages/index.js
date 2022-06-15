@@ -24,23 +24,22 @@ export default function Home() {
   //   ],
   // };
 
-  useEffect(() => {
-    function showNotification() {
-      if (!window.isSecureContext) return;
-      if (!Notification) return;
-      const notification = new Notification("Pedido iniciado!", {
-        body: "ATENÇÃO! O preparo da sua refeição acabou de começar! Logo mais traremos novidades :D",
-        icon: "images/icon-burger.png",
-        image: "images/burger.jpg",
-      });
-      notification.onclick = () => {
-        // window.location.href = 'rota de tracking'
-      };
-    }
+  function showNotification() {
+    if (!window.isSecureContext) return;
+    if (!Notification) return;
+    if (Notification.permission !== "granted") return;
+    const notification = new Notification("Pedido iniciado!", {
+      body: "ATENÇÃO! O preparo da sua refeição acabou de começar! Logo mais traremos novidades :D",
+      icon: "images/icon-burger.png",
+      image: "images/burger.jpg",
+    });
+    notification.onclick = () => {
+      // window.location.href = 'rota de tracking'
+    };
+  }
 
-    if (Notification.permission === "granted") {
-      showNotification();
-    } else if (Notification.permission !== "denied") {
+  useEffect(() => {
+    if (Notification.permission !== "denied") {
       Notification.requestPermission().then((permission) => {
         console.log(permission);
       });
@@ -62,13 +61,9 @@ export default function Home() {
 
       <h1 className={styles.title}>React PWA Boilerplate</h1>
       <p className={styles.summary}>Instale o nosso PWA!</p>
-      <button tton onClick={pwaTrackingListeners}>
-        Botão de instalação :D
-      </button>
+      <button onClick={pwaTrackingListeners}>Botão de instalação :D</button>
 
-      {/* <button tton onClick={() => setShowPush(showPush)}>
-        Botão de notificação
-      </button> */}
+      <button onClick={showNotification}>Botão de notificação</button>
 
       <footer className={styles.footer}>
         <p className={styles.description}>
