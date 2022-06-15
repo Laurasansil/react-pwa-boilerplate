@@ -24,21 +24,36 @@ export default function Home() {
   //   ],
   // };
 
+  // function showNotification() {
+  //   if (!window.isSecureContext) return;
+  //   if (!Notification) return;
+  //   if (Notification.permission !== "granted") return;
+  //   const notification = new Notification("Pedido iniciado!", {
+  //     body: "ATENÇÃO! O preparo da sua refeição acabou de começar! Logo mais traremos novidades :D",
+  //     icon: "images/icon-burger.png",
+  //     image: "images/burger.jpg",
+  //   });
+  //   notification.onclick = () => {
+  //     // window.location.href = 'rota de tracking'
+  //   };
+  // }
+
   function showNotification() {
-    if (!window.isSecureContext) return;
-    if (!Notification) return;
-    if (Notification.permission !== "granted") return;
-    const notification = new Notification("Pedido iniciado!", {
-      body: "ATENÇÃO! O preparo da sua refeição acabou de começar! Logo mais traremos novidades :D",
-      icon: "images/icon-burger.png",
-      image: "images/burger.jpg",
+    Notification.requestPermission(function (result) {
+      if (result === "granted") {
+        navigator.serviceWorker.ready.then(function (registration) {
+          registration.showNotification("Promoção", {
+            body: "ATENÇÃO! O preparo da sua refeição acabou de começar! Logo mais traremos novidades :D",
+            icon: "images/icon-burger.png",
+            image: "images/burger.jpg",
+          });
+        });
+      }
     });
-    notification.onclick = () => {
-      // window.location.href = 'rota de tracking'
-    };
   }
 
   useEffect(() => {
+    navigator.serviceWorker.register("service-worker.js");
     if (Notification.permission !== "denied") {
       Notification.requestPermission().then((permission) => {
         console.log(permission);
