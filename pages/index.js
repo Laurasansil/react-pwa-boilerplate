@@ -2,7 +2,7 @@ import Head from "next/head";
 import { pwaTrackingListeners } from "../scripts/pwaEventlisteners";
 import styles from "../styles/Home.module.css";
 import OneSignal from "react-onesignal";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   // useEffect(() => {
@@ -13,15 +13,23 @@ export default function Home() {
   //   });
   // }, []);
 
+  // const title = "Actions Notification";
+  // const options = {
+  //   actions: [
+  //     {
+  //       action: "burger-push",
+  //       title: "Burger",
+  //       icon: "icon-burger.png",
+  //     },
+  //   ],
+  // };
+
   useEffect(() => {
-    if (Notification.permission === "granted") {
+    if (Notification.permission === "granted" && window.isSecureContext) {
       let notification = new Notification("Pedido iniciado!", {
         body: "ATENÇÃO! O preparo da sua refeição acabou de começar! Logo mais traremos novidades :D",
-        icon: "vegetais.png",
-        dir: auto,
-        image: "burger.png",
-        lang: "pt-BR",
-        renotify: true,
+        icon: "images/icon-burger.png",
+        image: "/images/burger.jpg",
       });
       notification.onshow = () => {
         // window.open('https://google.com')
@@ -31,7 +39,7 @@ export default function Home() {
         console.log(permission);
       });
     }
-  });
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -51,10 +59,10 @@ export default function Home() {
       <button tton onClick={pwaTrackingListeners}>
         Botão de instalação :D
       </button>
-      {/* 
-      <button tton onClick={showNotification}>
+
+      <button tton onClick={() => setShowPush(showPush)}>
         Botão de notificação
-      </button> */}
+      </button>
 
       <footer className={styles.footer}>
         <p className={styles.description}>
