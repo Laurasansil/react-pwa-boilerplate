@@ -1,6 +1,5 @@
 import "../styles/globals.css";
 import { pwaTrackingListeners } from "../scripts/pwaEventlisteners";
-import { useEffect } from "react/cjs/react.production.min";
 
 const isBrowser = typeof window !== "undefined";
 

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { pwaTrackingListeners } from "../scripts/pwaEventlisteners";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/bananinha.module.css";
 import OneSignal from "react-onesignal";
 import { useEffect } from "react";
 
@@ -10,14 +10,13 @@ export default function Teste() {
       appId: "36f3eefd-9063-424c-8226-1b63900eb803",
       notifyButton: { enable: true },
       allowLocalhostAsSecureOrigin: true,
-      
     });
   }, []); // <-- run this effect once on mount
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>React PWA Boilerplate</title>
+        <title>Bananinha</title>
         <meta
           name="description"
           content="A PWA boilerplate/reference application in React"
@@ -27,7 +26,7 @@ export default function Teste() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <h1 className={styles.title}>React PWA Boilerplate</h1>
+      <h1 className={styles.title}>Bananinha</h1>
       <p className={styles.summary}>
         Install this web application when prompted to test PWA installability.
       </p>

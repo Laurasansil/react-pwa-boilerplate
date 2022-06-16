@@ -1,16 +1,29 @@
 import Head from "next/head";
-import { pwaTrackingListeners } from "../scripts/pwaEventlisteners";
-import styles from "../styles/maçazinha.module.css";
-import OneSignal from "react-onesignal";
+import styles from "../styles/notification.module.css";
 import { useEffect } from "react";
 
 export default function Home() {
-  useEffect(() => {
-    OneSignal.init({
-      appId: "3cf559ab-0b83-4f06-b636-db67c7a11e36",
-      notifyButton: { enable: true },
-      allowLocalhostAsSecureOrigin: true,
+  function showNotification() {
+    Notification.requestPermission(function (result) {
+      if (result === "granted") {
+        navigator.serviceWorker.ready.then(function (registration) {
+          registration.showNotification("Promoção", {
+            body: "ATENÇÃO! O preparo da sua refeição acabou de começar! Logo mais traremos novidades :D",
+            icon: "images/icon-burger.png",
+            image: "images/burger.jpg",
+          });
+        });
+      }
     });
+  }
+
+  useEffect(() => {
+    navigator.serviceWorker.register("service-worker.js");
+    if (Notification.permission !== "denied") {
+      Notification.requestPermission().then((permission) => {
+        console.log(permission);
+      });
+    }
   }, []);
 
   return (
@@ -26,9 +39,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <h1 className={styles.title}>Maçãzinha!</h1>
-      <p className={styles.summary}>Instale o nosso PWA!</p>
-      <button onClick={pwaTrackingListeners}>Botão de instalação :D</button>
+      <h1 className={styles.title}>Notification API!</h1>
+      <p className={styles.summary}>
+        Teste nossas notificações cliando no botão abaixo C:
+      </p>
+
+      <button onClick={showNotification}>Botão de notificação</button>
 
       <footer className={styles.footer}>
         <p className={styles.description}>
