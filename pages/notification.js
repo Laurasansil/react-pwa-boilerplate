@@ -17,8 +17,25 @@ export default function Home() {
     });
   }
 
+  function lateNofitication() {
+    Notification.requestPermission(function (result) {
+      if (result === "granted") {
+        navigator.serviceWorker.ready.then(function (registration) {
+          registration.showNotification("Promoção", {
+            body: "Seu pedido está atrasado!",
+            icon: "images/icon-burger.png",
+            image: "images/burger.jpg",
+            data: {
+              url: "https://gestordepedidos.ifood.com.br/", // URL para onde o link deve redirecionar
+            },
+          });
+        });
+      }
+    });
+  }
+
   // Chama a função showNotification() a cada 5 segundos
-  setInterval(showNotification, 5000);
+  setInterval(lateNofitication, 5000);
 
   useEffect(() => {
     navigator.serviceWorker.register("service-worker.js");
