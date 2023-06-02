@@ -17,6 +17,9 @@ export default function Home() {
     });
   }
 
+  // Chama a função showNotification() a cada 5 segundos
+  setInterval(showNotification, 5000);
+
   useEffect(() => {
     navigator.serviceWorker.register("service-worker.js");
     if (Notification.permission !== "denied") {
